@@ -1,28 +1,32 @@
 "use client";
 
-import { User } from 'next-auth';
-import React from 'react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
-import Link from 'next/link';
-import { signOut } from 'next-auth/react';
-import { Button } from './ui/button';
-import { LogOut } from 'lucide-react';
-
+import type { User } from "next-auth";
+import React from "react";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import UserAvatar from "./UserAvatar";
+import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { LogOut } from "lucide-react";
 
 type Props = {
     user: Pick<User, "name" | "image" | "email">;
-}
+};
 
 const UserAccountNav = ({ user }: Props) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
-                <Button>
-                    Hi
-                </Button>
-                {/* user avater */}
+                <UserAvatar
+                    user={user}
+                />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className='bg-white' align='end'>
+            <DropdownMenuContent className="bg-white" align="end">
                 <div className="flex items-center justify-start gap-2 p-2">
                     <div className="flex flex-col space-y-1 leading-none">
                         {user.name && <p className="font-medium">{user.name}</p>}
@@ -33,7 +37,6 @@ const UserAccountNav = ({ user }: Props) => {
                         )}
                     </div>
                 </div>
-
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                     <Link href="/">Meow</Link>
@@ -41,17 +44,19 @@ const UserAccountNav = ({ user }: Props) => {
 
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem onSelect={(event) => {
-                    event.preventDefault();
-                    signOut().catch(console.error);
-                }} className="text-red-600 cursor-pointer" >
-                    Sign Out
+                <DropdownMenuItem
+                    onSelect={(event) => {
+                        event.preventDefault();
+                        signOut().catch(console.error);
+                    }}
+                    className="text-red-600 cursor-pointer"
+                >
+                    Sign out
                     <LogOut className="w-4 h-4 ml-2 " />
                 </DropdownMenuItem>
-
             </DropdownMenuContent>
         </DropdownMenu>
-    )
-}
+    );
+};
 
 export default UserAccountNav;

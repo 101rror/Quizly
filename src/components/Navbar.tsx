@@ -3,6 +3,7 @@ import { getAuthSession } from '@/lib/nextauth';
 import SignInButton from './SignInButton';
 import UserAccountNav from './UserAccountNav';
 import IconButton from './IconButton';
+import { ThemeToggle } from './ThemeToggle';
 
 type Props = {}
 
@@ -18,11 +19,14 @@ const Navbar = async (props: Props) => {
                 </IconButton>
 
                 <div className="flex items-center">
-                    {session?.user ? (
-                        <UserAccountNav user={session.user} />
-                    ) : (
-                        <SignInButton text="Sign In" />
-                    )}
+                    <ThemeToggle className='mr-4' />
+                    <div className="flex items-center">
+                        {session?.user ? (
+                            <UserAccountNav user={session.user} />
+                        ) : (
+                            <SignInButton text="Sign In" />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
