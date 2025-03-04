@@ -4,37 +4,20 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import D3WordCloud from "react-d3-cloud";
 
-type Props = {};
-
-const data = [
-  {
-    text: "hey",
-    value: 3,
-  },
-  {
-    text: "oi",
-    value: 2,
-  },
-  {
-    text: "Next",
-    value: 8,
-  },
-  {
-    text: "live",
-    value: 7,
-  },
-]
+type Props = {
+  formattedTopics: { text: string; value: number }[];
+};
 
 const fontSizeMapper = (word: { value: number }) =>
   Math.log2(word.value) * 5 + 16;
 
-const WordCloud = (props: Props) => {
+const WordCloud = ({ formattedTopics }: Props) => {
   const theme = useTheme();
   const router = useRouter();
   return (
     <>
       <D3WordCloud
-        data={data}
+        data={formattedTopics}
         height={550}
         font="Times"
         fontSize={fontSizeMapper}
