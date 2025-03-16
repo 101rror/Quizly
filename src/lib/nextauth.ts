@@ -1,5 +1,4 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { type GetServerSidePropsContext } from "next";
 import {
     getServerSession,
     type NextAuthOptions,
@@ -12,15 +11,8 @@ declare module "next-auth" {
     interface Session extends DefaultSession {
         user: {
             id: string;
-            // ...other properties
-            // role: UserRole;
         } & DefaultSession["user"];
     }
-
-    // interface User {
-    //   // ...other properties
-    //   // role: UserRole;
-    // }
 }
 
 declare module "next-auth/jwt" {
@@ -37,9 +29,7 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         jwt: async ({ token }) => {
             const db_user = await prisma.user.findFirst({
-                where: {
-                    email: token?.email,
-                },
+                where: { email: token?.email },
             });
             if (db_user) {
                 token.id = db_user.id;
@@ -65,6 +55,4 @@ export const authOptions: NextAuthOptions = {
     ],
 };
 
-export const getAuthSession = () => {
-    return getServerSession(authOptions);
-};
+export const getAuthSession = () => getServerSession(authOptions);
