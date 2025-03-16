@@ -43,7 +43,7 @@ const UserAccountNav = ({ user }: Props) => {
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                    <Link href="/">Meow</Link>
+                    <Link href="https://github.com/101rror">Github</Link>
                 </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
