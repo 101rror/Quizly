@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { getAuthSession } from "@/lib/nextauth";
 import { redirect } from "next/navigation";
-import HistoryComponent from "@/components/HistoryComponent";
+import HistoryComponent from "../HistoryComponent";
 import { prisma } from "@/lib/db";
 
 type Props = {};

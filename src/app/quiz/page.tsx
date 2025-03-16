@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import QuizCreation from "@/components/forms/QuizCreation";
 
 export const metadata = {
-  title: "Quizly",
+  title: "Quiz | Quizly",
   description: "Quiz yourself on anything!",
 };
 
